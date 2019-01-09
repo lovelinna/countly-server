@@ -1060,9 +1060,10 @@ window.NetworkMetricView = countlyView.extend({
                 }
                 self.renderCommon(true);
                 var newPage = $("<div>" + self.template(self.templateData) + "</div>");
+                console.log("newPage="+newPage);
                 $(".crashoveral .dashboard").replaceWith(newPage.find(".dashboard"));
-                $(".crash-big-numbers").replaceWith(newPage.find(".crash-big-numbers"));
-                $(".dashboard-summary").replaceWith(newPage.find(".dashboard-summary"));
+                // $(".crash-big-numbers").replaceWith(newPage.find(".crash-big-numbers"));
+                // $(".dashboard-summary").replaceWith(newPage.find(".dashboard-summary"));
                 
                 $("#crash-"+self.curMetric).parents(".big-numbers").addClass("active");
                 $(".widget-content .inner").click(function () {
