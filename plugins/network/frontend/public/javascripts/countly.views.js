@@ -1001,7 +1001,6 @@ window.NetworkMetricView = countlyView.extend({
             });
         }
 		var self = this;
-
         if (!isRefresh) {
             $(this.el).html(this.template(this.templateData));
             $("#total-user-estimate-ind").on("click", function() {
@@ -1060,8 +1059,7 @@ window.NetworkMetricView = countlyView.extend({
                 }
                 self.renderCommon(true);
                 var newPage = $("<div>" + self.template(self.templateData) + "</div>");
-                console.log("newPage="+newPage);
-                console.log("info", newPage);
+
                 $(".crashoveral .dashboard").replaceWith(newPage.find(".dashboard"));
                 // $(".crash-big-numbers").replaceWith(newPage.find(".crash-big-numbers"));
                 // $(".dashboard-summary").replaceWith(newPage.find(".dashboard-summary"));
