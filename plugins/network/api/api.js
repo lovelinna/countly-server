@@ -149,56 +149,43 @@ var plugin = {},
 			return true;
 		}else if(params.qstring.method == 'metrics'){
             validateUserForDataReadAPI(params, function(params){
-                var result = {};
-                common.db.collection('app_users' + params.app_id).count({},function(err, total) {
-                    result.users = {};
-                    result.users.total = total;
-                    result.users.affected = 0;
-                    result.users.fatal = 0;
-                    result.users.nonfatal = 0;
-                    result.crashes = {};
-                    result.crashes.total = 0;
-                    result.crashes.unique = 0;
-                    result.crashes.resolved = 0;
-                    result.crashes.unresolved = 0;
-                    result.crashes.fatal = 0;
-                    result.crashes.nonfatal = 0;
-                    result.crashes.news = 0;
-                    result.crashes.renewed = 0;
-                    result.crashes.os = {};
-                    result.crashes.highest_app = "";
-                    result.loss = 0;
-                    common.db.collection('app_crashgroups' + params.app_id).findOne({_id:"meta"}, function(err, meta){
-                        if(meta){
-                            result.users.affected = meta.users || 0;
-                            result.users.fatal = meta.usersfatal || 0;
-                            result.users.nonfatal = result.users.affected - result.users.fatal;
-                            result.crashes.total = meta.reports || 0;
-                            result.crashes.unique = meta.crashes || 0;
-                            result.crashes.resolved = meta.resolved || 0;
-                            result.crashes.unresolved = result.crashes.unique - result.crashes.resolved;
-                            result.crashes.fatal = meta.fatal || 0;
-                            result.crashes.nonfatal = meta.nonfatal || 0;
-                            result.crashes.news = meta.isnew || 0;
-                            result.crashes.renewed = meta.reoccurred || 0;
-                            result.crashes.os = meta.os || {};
-                            result.loss = meta.loss || 0;
-                            
-                            var max = "0:0";
-                            for(var j in meta.app_version){
-                                if(meta.app_version[j] > 0 && common.versionCompare(j, max) > 0){
-                                    result.crashes.highest_app = j.replace(/:/g, '.');
-                                    max = j;
-                                }
-                            }
-                        }
-                        fetch.getTimeObj("networkmetricdata", params, {unique: "cru"/*, levels:{daily:["cr","crnf","cru","crf", "crru"], monthly:["cr","crnf","cru","crf", "crru"]}*/}, function(data){
+                    var result = {};
+                        result.users = {};
+                        result.users.total = 0;
+                        result.users.affected = 0;
+                        result.users.fatal = 0;
+                        result.users.nonfatal = 0;
+                        result.crashes = {};
+                        result.crashes.total = 0;
+                        result.crashes.unique = 0;
+                        result.crashes.resolved = 0;
+                        result.crashes.unresolved = 0;
+                        result.crashes.fatal = 0;
+                        result.crashes.nonfatal = 0;
+                        result.crashes.news = 0;
+                        result.crashes.renewed = 0;
+                        result.crashes.os = {};
+                        result.crashes.highest_app = "";
+                        result.loss = 0;
+                        result.users.affected = 0;
+                        result.users.fatal =  0;
+                        result.users.nonfatal = 0;
+                        result.crashes.total =  0;
+                        result.crashes.unique =  0;
+                        result.crashes.resolved =  0;
+                        result.crashes.unresolved = 0;
+                        result.crashes.fatal =  0;
+                        result.crashes.nonfatal = 0;
+                        result.crashes.news =  0;
+                        result.crashes.renewed =  0;
+                        result.crashes.os =  {};
+                        result.loss =  0;
+                        result.crashes.highest_app ="0:0";
+                        fetch.getTimeObj("networkmetricdata", params, {}, function(data){
                             result.data = data;
                             common.returnOutput(params, result);
                         });
                     });
-                });
-            });
             return true;
             }
 		return false;
