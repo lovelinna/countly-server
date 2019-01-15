@@ -23,7 +23,6 @@
 
         _period = countlyCommon.getPeriodForAjax();
 
-
         if(id){
             if('metrics'==id){
                 return $.ajax({
@@ -151,11 +150,11 @@
 
             if (_activeAppKey != countlyCommon.ACTIVE_APP_KEY) {
                 _activeAppKey = countlyCommon.ACTIVE_APP_KEY;
-                return this.initialize();
+                return this.initialize(id);
             }
             
             if(!_initialized)
-                return this.initialize();
+                return this.initialize(id);
 
                 _period = countlyCommon.getPeriodForAjax();
                 if(id){
@@ -447,9 +446,7 @@
         return _crashData;
     }
     countlyNetwork.getDashboardData = function () {
-        console.log("_crashTimeline", _crashTimeline);
         var data = countlyCommon.getDashboardData(_crashTimeline, ["cr", "crnf", "crf", "cru", "crru"], [], null, countlyNetwork.clearMetricsObject);
-        console.log("dashborad data", data);
         return {usage:data,period:_period};
     };
     countlyNetwork.getMetricsChartData = function(metric, name){
