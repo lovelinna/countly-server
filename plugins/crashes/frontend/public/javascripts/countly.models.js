@@ -387,8 +387,8 @@
 						_crashData.crashes.os = "None";
 					if(_crashData.crashes.highest_app == "")
 						_crashData.crashes.highest_app = "None";
-                    
-                    countlyCommon.extendDbObj(_crashTimeline, json.data);
+                    _crashTimeline = _crashData.data;
+                    // countlyCommon.extendDbObj(_crashTimeline, json.data);
 				}
 			});
     };
