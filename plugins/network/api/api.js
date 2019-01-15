@@ -2,7 +2,7 @@ var plugin = {},
     crypto = require('crypto'),
     request = require('request'),
     Promise = require("bluebird"),
-    CircularJSON = require('circular-json'),
+    // CircularJSON = require('circular-json'),
 	common = require('../../../api/utils/common.js'),
 	authorize = require('../../../api/utils/authorizer.js'),
     countlyCommon = require('../../../api/lib/countly.common.js'),
@@ -181,7 +181,7 @@ var plugin = {},
                         result.crashes.os =  {};
                         result.loss =  0;
                         result.crashes.highest_app ="0:0";
-                        console.log("params",CircularJSON.stringify(params));
+                        // console.log("params",CircularJSON.stringify(params));
                         fetch.getTimeObj("networkmetricdata", params, {}, function(data){
                             result.data = data;
                             console.log("data", JSON.stringify(data));
