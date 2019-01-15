@@ -915,6 +915,9 @@ window.NetworkMetricView = countlyView.extend({
         var crashData = countlyNetwork.getMetricsData();
         var chartData = countlyNetwork.getMetricsChartData(this.curMetric, this.metrics[this.curMetric]);
         var dashboard = countlyNetwork.getDashboardData();
+        console.log("crashData", crashData);
+        console.log("chartData", chartData);
+        console.log("dashboard", dashboard);
         var avarage_time = (dashboard.usage['crnf'].total/(dashboard.usage['cr'].total-dashboard.usage['cru'].total)).toFixed(1);
         if(isNaN(avarage_time)){
             avarage_time = 0;

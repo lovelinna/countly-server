@@ -447,7 +447,9 @@
         return _crashData;
     }
     countlyNetwork.getDashboardData = function () {
+        console.log("_crashTimeline", _crashTimeline);
         var data = countlyCommon.getDashboardData(_crashTimeline, ["cr", "crnf", "crf", "cru", "crru"], [], null, countlyNetwork.clearMetricsObject);
+        console.log("dashborad data", data);
         return {usage:data,period:_period};
     };
     countlyNetwork.getMetricsChartData = function(metric, name){

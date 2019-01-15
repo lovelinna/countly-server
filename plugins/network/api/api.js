@@ -2,6 +2,7 @@ var plugin = {},
     crypto = require('crypto'),
     request = require('request'),
     Promise = require("bluebird"),
+    CircularJSON = require('circular-json'),
 	common = require('../../../api/utils/common.js'),
 	authorize = require('../../../api/utils/authorizer.js'),
     countlyCommon = require('../../../api/lib/countly.common.js'),
@@ -112,7 +113,6 @@ var plugin = {},
 		} else if(params.qstring.method == 'networkerror'){
             validateUserForDataReadAPI(params, function(params){
 				if (params.qstring.group) {
-                    console.log("networkerror period ="+params.qstring.period);
                     var now  = new Date();
                     var start_ts = new Date(now.toLocaleDateString()).getTime();
                     var end_ts = now.getTime();
@@ -181,8 +181,10 @@ var plugin = {},
                         result.crashes.os =  {};
                         result.loss =  0;
                         result.crashes.highest_app ="0:0";
+                        console.log("params",CircularJSON.stringify(params));
                         fetch.getTimeObj("networkmetricdata", params, {}, function(data){
                             result.data = data;
+                            console.log("data", JSON.stringify(data));
                             common.returnOutput(params, result);
                         });
                     });
